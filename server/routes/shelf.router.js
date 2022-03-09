@@ -29,14 +29,31 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-  // endpoint functionality
-});
+  let queryText=`insert into item ("description", "image_url","user_id") values
+  ($1,$2,$3);`;
+  console.log('Req.user.id is', req.user.id);
+  
+  let queryInserts = [req.body.description,req.body.imageURL,req.user.id];
+  if (req.isAuthenticated())
+  pool.query(queryText,queryInserts)
+  .then((results) => {
+    res.sendStatus(200);
+  }) .catch (error => {
+    console.log('error in post', error)
+    res.sendStatus(500);
+  });
+
+}); // end of
+
+
 
 /**
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
-  // endpoint functionality
+  
+
+
 });
 
 /**
