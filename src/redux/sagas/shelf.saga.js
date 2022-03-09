@@ -15,7 +15,7 @@ function* fetchItems() {
     // // from the server session (req.user)
     const response = yield axios.get('/api/shelf');
     console.log('response.data is', response.data);
-    yield put({ type: 'SET_ITEMS', payload: response.data });
+    yield put({ type: 'SET_SHELF', payload: response.data });
   } catch (error) {
     console.log('User get request failed', error);
   }
