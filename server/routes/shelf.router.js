@@ -15,8 +15,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   let queryText=`insert into item ("description", "image_url","user_id") values
   ($1,$2,$3);`;
-
-  let queryInserts = [req.body.description,req.body.image_url,req.body.id];
+  console.log('Req.user.id is', req.user.id);
+  
+  let queryInserts = [req.body.description,req.body.imageURL,req.user.id];
   if (req.isAuthenticated())
   pool.query(queryText,queryInserts)
   .then((results) => {
@@ -25,6 +26,7 @@ router.post('/', (req, res) => {
     console.log('error in post', error)
     res.sendStatus(500);
   });
+
 }); // end of
 
 
