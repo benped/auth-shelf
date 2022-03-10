@@ -9,7 +9,7 @@ function AddBook() {
 
   const clickHandler = () => {
     console.log("Inside Click handler");
-    console.log('user is', user);
+    // console.log('user is', user);
     dispatch({
       type: "ADD_BOOK",
       payload: { description: bookDescription, imageURL: imageURL },
