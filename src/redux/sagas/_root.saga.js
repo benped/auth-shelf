@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import shelfSaga from './shelf.saga';
 import AddWatcherSaga from './addBook.saga';
+import editBookSaga from './editBook.saga';
 import DeleteWatcherSaga from './deleteBook.saga';
 
 // rootSaga is the primary saga.
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     userSaga(),
     shelfSaga(),
     AddWatcherSaga(),
+    editBookSaga(),
     DeleteWatcherSaga(),
   ]);
 }

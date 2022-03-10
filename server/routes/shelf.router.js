@@ -5,26 +5,23 @@ const router = express.Router();
 /**
  * Get all of the items on the shelf
  */
-router.get("/", (req, res) => {
-  console.log("are you here");
-  if (req.isAuthenticated()) {
-    console.log("/shelf GET route");
-    console.log("is authenticated", req.isAuthenticated());
-    console.log("user", req.user);
-    const queryText = `SELECT * FROM "item";`;
-    pool
-      .query(queryText)
-      .then((result) => {
-        res.send(result.rows);
-      })
-      .catch((error) => {
-        console.log(error);
-        res.sendStatus(500);
-      });
-  } else {
-    res.sendStatus(403);
-  }
-  // res.sendStatus(200); // For testing only, can be removed
+router.get('/', (req, res) => {
+    console.log('are you here');
+    if (req.isAuthenticated()) {
+        console.log('/shelf GET route');
+        console.log('is authenticated', req.isAuthenticated());
+        console.log('user', req.user);
+        const queryText = `SELECT * FROM "item";`;
+        pool.query(queryText).then((result) => {
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
+    // res.sendStatus(200); // For testing only, can be removed
 });
 
 /**
@@ -77,23 +74,34 @@ router.delete("/:id", (req, res) => {
 /**
  * Update an item if it's something the logged in user added
  */
-router.put("/:id", (req, res) => {
-  // endpoint functionality
+router.put('/:id', (req, res) => {
+    console.log('/shelf put route', req.body);
+    const queryText = `UPDATE "item"
+  SET "description" =  $1, "image_url" = $2
+  WHERE id = $3;`;
+    // endpoint functionality
+
+    const queryValues = [req.body.description, req.body.image_url, req.params.id];
+
+    pool.query(queryText, queryValues).then(() => {
+        res.sendStatus(200)
+    }).catch((error) => {
+        console.log('Error updating item', error);
+        res.sendStatus(500);
+    })
 });
 
 /**
  * Return all users along with the total number of items
  * they have added to the shelf
  */
-router.get("/count", (req, res) => {
-  // endpoint functionality
+router.get('/count', (req, res) => { // endpoint functionality
 });
 
 /**
  * Return a specific item by id
  */
-router.get("/:id", (req, res) => {
-  // endpoint functionality
+router.get('/:id', (req, res) => { // endpoint functionality
 });
 
 module.exports = router;

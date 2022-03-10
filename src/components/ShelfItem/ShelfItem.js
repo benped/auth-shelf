@@ -1,39 +1,27 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom'
 import {useDispatch} from 'react-redux';
 
 
+function ShelfItem({book}) {
+    console.log('in ShelfItem');
+     
+//   const books = useSelector(store => store.shelf);
+//   console.log('books are', books);
+const history = useHistory();
+const dispatch = useDispatch();
+const handleClick = () => {
+  console.log('clicked edit');
+  dispatch({type: 'SET_EDIT_BOOK', payload: book})
+  history.push('/info')
 
-function ShelfItem({ book }) {
-  console.log('in ShelfItem');
-
-  const dispatch = useDispatch();
-
-
-  //   const books = useSelector(store => store.shelf);
-
-
-  //   console.log('books are', books);
-
-  // when delete is pressed, it will delete the list row
-  function deleteBook() {
-    console.log(book.id);
-    
-    dispatch({ type: 'DELETE_BOOK', payload: book.id});
-
-  }
-
-
+}
+  
   return (
-    <li
-      value={book.id}
-    >
-      {book.description}
-      <img src={book.image_url} alt="book image" />
-      <button
-
-        onClick={() => deleteBook(book.id)}
-      >DELETE</button>
-
+    <li>
+        {book.description}
+        <img src={book.image_url} alt="book image" />
+        <button onClick={handleClick}>Edit</button>
     </li>
 
 
