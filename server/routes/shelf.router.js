@@ -61,7 +61,7 @@ router.put('/:id', (req, res) => {
   WHERE id = $3;`;
     // endpoint functionality
 
-    const queryValues = [req.body.description, req.body.image_url, req.user.id];
+    const queryValues = [req.body.description, req.body.image_url, req.params.id];
 
     pool.query(queryText, queryValues).then(() => {
         res.sendStatus(200)

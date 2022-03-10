@@ -4,10 +4,10 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* editBook(action) {
     console.log('In edit book, action.payload is:', action.payload);
     try{
-        yield axios.put('/api/shelf/', action.payload);
+        yield axios.put(`/api/shelf/${action.payload.id}`, action.payload);
         yield put({type: 'FETCH_BOOKS'}) //
     }catch (error){
-        console.log('Error editing book');
+        console.log('Error editing book', error);
     }
    
 }
