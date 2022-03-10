@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // Fetch items 
-function* fetchItems() {
+function* fetchBooks() {
   try {
     // const config = {
     //   headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ function* fetchItems() {
 }
 
 function* shelfSaga() {
-  yield takeLatest('FETCH_ITEMS', fetchItems);
+  yield takeLatest('FETCH_BOOKS', fetchBooks);
 }
 
 export default shelfSaga;
