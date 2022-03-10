@@ -23,9 +23,9 @@ const handleClick = () => {
         <img src={book.image_url} alt="book image" />
         <button onClick={handleClick}>Edit</button>
     </li>
-    
 
-   
+
+
   );
 }
 
