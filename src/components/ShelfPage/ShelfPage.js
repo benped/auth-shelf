@@ -8,6 +8,7 @@ function ShelfPage() {
   const dispatch = useDispatch();
   const books = useSelector(store => store.shelf);
 
+  // will re-render page every change to states
   useEffect(() => {
     dispatch({ type: 'FETCH_BOOKS' })
   }, [])

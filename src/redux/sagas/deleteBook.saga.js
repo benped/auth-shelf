@@ -8,8 +8,9 @@ function* DeleteSaga(action) {
         yield axios.delete(`/api/shelf/${action.payload}`);
     } catch (error) {
         console.log('Error on deletesaga delete', error);
-
     }
+    // re-renders DOM after pressing delete
+    yield put ({type: 'FETCH_BOOKS'});
 }
 
 
